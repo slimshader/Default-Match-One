@@ -14,4 +14,9 @@ public class View : MonoBehaviour, IView
     {
         transform.localPosition = new Vector3(value.x, value.y);
     }
+
+    public void OnDestroy()
+    {
+        Destroy(gameObject);
+    }
 }

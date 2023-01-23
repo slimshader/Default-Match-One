@@ -10,7 +10,6 @@ public class PositionViewSystem : AEntitySetSystem<float>
 
     protected override void Update(float state, in Entity entity)
     {
-        //base.Update(state, entity);
         entity.Get<ViewComponent>().Value.OnPosition(entity.Get<Position>().Value);
     }
 }
