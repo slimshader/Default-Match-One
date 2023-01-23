@@ -57,6 +57,7 @@ public class GameController : MonoBehaviour
 
 
         _systems = new SequentialSystem<float>(
+            new CameraViewSystem(_world, Camera.main),
             new AddViewSystem(_world),
             new PositionViewSystem(_world));
 
