@@ -554,6 +554,7 @@ MonoBehaviour:
   _gameConfig: {fileID: 11400000, guid: 6c4a3941c55f94645b6db2f2966718cf, type: 2}
   _pieceColorsConfig: {fileID: 11400000, guid: 728c162fa75b44542b8bfd3b7e599491, type: 2}
   _scoreLabel: {fileID: 760695794}
+  _cameraView: {fileID: 1964826948}
 --- !u!4 &1577264198
 Transform:
   m_ObjectHideFlags: 0
@@ -837,6 +838,7 @@ GameObject:
   - component: {fileID: 1964826947}
   - component: {fileID: 1964826946}
   - component: {fileID: 1964826945}
+  - component: {fileID: 1964826948}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -910,3 +912,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1964826948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964826944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea23900574302242a67b359cad422bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

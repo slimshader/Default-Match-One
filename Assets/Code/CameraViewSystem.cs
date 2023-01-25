@@ -3,23 +3,26 @@ using DefaultEcs.System;
 using System;
 using UnityEngine;
 
-public class CameraViewSystem : AEntitySetSystem<float>
+namespace DefaultMatchOne
 {
-    private readonly Camera _camera;
-
-    public CameraViewSystem(World world, Camera camera) : base(world.GetEntities().WhenChanged<Board>().WhenAdded<Board>().AsSet())
+    public class CameraViewSystem : AEntitySetSystem<float>
     {
-        _camera = camera;
-    }
+        private readonly Camera _camera;
 
-    protected override void Update(float state, in Entity entity)
-    {
-        var size = entity.Get<Board>().Value;
-        _camera.orthographicSize = Math.Max(size.x, size.y) * 0.7f;
-        _camera.transform.localPosition = new Vector3(
-            size.x * 0.5f - 0.5f,
-            size.y * 0.6f,
-            -10
-        );
+        public CameraViewSystem(World world, Camera camera) : base(world.GetEntities().WhenChanged<Board>().WhenAdded<Board>().AsSet())
+        {
+            _camera = camera;
+        }
+
+        protected override void Update(float state, in Entity entity)
+        {
+            var size = entity.Get<Board>().Size;
+            _camera.orthographicSize = Math.Max(size.x, size.y) * 0.7f;
+            _camera.transform.localPosition = new Vector3(
+                size.x * 0.5f - 0.5f,
+                size.y * 0.6f,
+                -10
+            );
+        }
     }
 }

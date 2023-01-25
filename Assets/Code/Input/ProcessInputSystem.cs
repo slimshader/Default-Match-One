@@ -1,21 +1,24 @@
 using DefaultEcs;
 using DefaultEcs.System;
 
-public class ProcessInputSystem : AComponentSystem<float, InputComponent>
+namespace DefaultMatchOne
 {
-    private readonly EntityMap<Position> _byPosition;
-
-    public ProcessInputSystem(World world) : base(world)
+    public class ProcessInputSystem : AComponentSystem<float, InputComponent>
     {
-        _byPosition = world.GetEntities().With<Piece>().AsMap<Position>();
-    }
+        private readonly EntityMap<Position> _byPosition;
 
-    protected override void Update(float dt, ref InputComponent component)
-    {
-        if (_byPosition.TryGetEntity(new Position() { Value = component.Value }, out var e))
+        public ProcessInputSystem(World world) : base(world)
         {
-            if (e.Has<IsInteractable>())
-                e.Set<IsDestroyed>();
+            _byPosition = world.GetEntities().With<Piece>().AsMap<Position>();
+        }
+
+        protected override void Update(float dt, ref InputComponent component)
+        {
+            if (_byPosition.TryGetEntity(new Position() { Value = component.Value }, out var e))
+            {
+                if (e.Has<IsInteractable>())
+                    e.Set<IsDestroyed>();
+            }
         }
     }
 }

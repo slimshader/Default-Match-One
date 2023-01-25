@@ -3,38 +3,44 @@ using DefaultEcs.System;
 using System;
 using UnityEngine;
 
-public class InpuSystem : ISystem<float>
+namespace DefaultMatchOne
 {
-    private readonly World _world;
-    private readonly Camera _camera;
-
-    public InpuSystem(World world, Camera camera)
+    public class InpuSystem : ISystem<float>
     {
-        _world = world;
-        _camera = camera;
-        IsEnabled = true;
-    }
+        private readonly World _world;
+        private readonly Camera _camera;
 
-    public bool IsEnabled { get; set; }
-
-    public void Dispose() { }
-
-    public void Update(float state)
-    {
-        if (IsEnabled)
+        public InpuSystem(World world, Camera camera)
         {
-            var input = _world.Has<BurstMode>()
-                ? Input.GetMouseButton(0)
-                : Input.GetMouseButtonDown(0);
+            _world = world;
+            _camera = camera;
+            IsEnabled = true;
+        }
 
-            if (input)
+        public bool IsEnabled { get; set; }
+
+        public void Dispose() { }
+
+        public void Update(float state)
+        {
+            if (IsEnabled)
             {
-                var mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
-                var e = _world.CreateEntity();
-                e.Set(new InputComponent() { Value = new Vector2Int(
-                    (int)Math.Round(mouseWorldPos.x),
-                    (int)Math.Round(mouseWorldPos.y)
-                    ) });
+                var input = _world.Has<BurstMode>()
+                    ? Input.GetMouseButton(0)
+                    : Input.GetMouseButtonDown(0);
+
+                if (input)
+                {
+                    var mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
+                    var e = _world.CreateEntity();
+                    e.Set(new InputComponent()
+                    {
+                        Value = new Vector2Int(
+                        (int)Math.Round(mouseWorldPos.x),
+                        (int)Math.Round(mouseWorldPos.y)
+                        )
+                    });
+                }
             }
         }
     }
