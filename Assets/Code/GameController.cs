@@ -98,6 +98,7 @@ namespace DefaultMatchOne
                 new ProcessInputSystem(_world),
 
                 // Update
+                new FallSystem(_world),
                 new ScoreSystem(_world),
 
                 // View
