@@ -12,7 +12,7 @@ namespace DefaultMatchOne
 
         protected override void Update(float state, in Entity entity)
         {
-            entity.Get<ViewComponent>().Value.OnDestroy();
+            entity.Get<ViewComponent>().Value.OnDestroyed();
         }
     }
 }

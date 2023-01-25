@@ -20,7 +20,7 @@ namespace DefaultMatchOne
             transform.localPosition = new Vector3(value.x, value.y);
         }
 
-        public virtual void OnDestroy()
+        public virtual void OnDestroyed()
         {
             Destroy(gameObject);
         }

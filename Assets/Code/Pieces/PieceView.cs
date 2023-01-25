@@ -30,14 +30,14 @@ namespace DefaultMatchOne
             transform.DOMove(new Vector3(value.x, value.y, 0f), 0.3f);
         }
 
-        public override void OnDestroy()
+        public override void OnDestroyed()
         {
             var color = Sprite.color;
             color.a = 0f;
             Sprite.material.DOColor(color, DestroyDuration);
             gameObject.transform
                 .DOScale(Vector3.one * 1.5f, DestroyDuration)
-                .OnComplete(base.OnDestroy);
+                .OnComplete(base.OnDestroyed);
         }
     }
 }

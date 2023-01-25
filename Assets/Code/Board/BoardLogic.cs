@@ -19,6 +19,7 @@ namespace DefaultMatchOne
             }
 
             piecesByPosition.Dispose();
+            piecesByPosition.Complete();
 
             return position.y + 1;
         }

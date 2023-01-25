@@ -25,34 +25,30 @@ namespace DefaultMatchOne
         {
             var board = World.Get<Board>().Size;
 
-            var _movablePiecesByPosition = World.GetEntities()
-                .With<Piece>()
-    .With<IsMovable>()
-    .Without<IsDestroyed>()
-    .AsMap<Position>();
-
-            var recorder = new EntityCommandRecorder();
-
             for (var x = 0; x < board.x; x++)
             {
                 for (var y = 1; y < board.y; y++)
                 {
+                    var movablePiecesByPosition = World.GetEntities()
+                                                    .With<Piece>()
+                                                    .With<IsMovable>()
+                                                    .Without<IsDestroyed>()
+                                                    .AsMap<Position>();
+
                     var position = new Vector2Int(x, y);
 
-                    if (_movablePiecesByPosition.TryGetEntity(new Position() { Value = position }, out var e))
+                    if (movablePiecesByPosition.TryGetEntity(new Position() { Value = position }, out var e))
                     {
-                        var record = recorder.Record(e);
-                        MoveDown(e, position, in record);
+                        movablePiecesByPosition.Dispose();
+                        movablePiecesByPosition.Complete();
+
+                        MoveDown(e, position);
                     }
                 }
             }
-
-            _movablePiecesByPosition.Dispose();
-            _movablePiecesByPosition.Complete();
-            recorder.Execute();
         }
 
-        private void MoveDown(in Entity e, Vector2Int position, in EntityRecord record)
+        private void MoveDown(in Entity e, Vector2Int position)
         {
             var nextRowPos = BoardLogic.GetNextEmptyRow(e.World, position);
             if (nextRowPos != position.y)
@@ -63,7 +59,6 @@ namespace DefaultMatchOne
                 try
                 {
                     e.Set(pos);
-                    //record.Set(pos);
                 }
                 catch (Exception ex)
                 {

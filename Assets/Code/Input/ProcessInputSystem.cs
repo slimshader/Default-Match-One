@@ -19,6 +19,8 @@ namespace DefaultMatchOne
                 if (e.Has<IsInteractable>())
                     e.Set<IsDestroyed>();
             }
+
+            _byPosition.Complete();
         }
     }
 }

@@ -20,6 +20,8 @@ namespace DefaultMatchOne
     public struct Position
     {
         public Vector2Int Value;
+
+        public override string ToString() => $"{Value}";
     }
 
     public struct Asset
@@ -102,14 +104,14 @@ namespace DefaultMatchOne
                 new ScoreSystem(_world),
 
                 // View
-                new CameraViewSystem(_world, Camera.main),
                 new AddViewSystem(_world),
-                new RemoveViewSystem(_world),
 
                 // Events
                 new PositionViewSystem(_world),
 
                 // Cleanup
+                new RemoveViewSystem(_world),
+
                 new CleanupInputSystem(_world),
                 new DisposeDestroyedSystem(_world)
                 );
@@ -127,7 +129,6 @@ namespace DefaultMatchOne
                         _world.CreateRandomPiece(x, y);
         }
 
-        // Update is called once per frame
         void Update()
         {
             _systems.Update(Time.deltaTime);

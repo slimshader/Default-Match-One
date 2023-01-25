@@ -6,6 +6,6 @@ public interface IView
     void Link(Entity entity);
 
     // not as in original
-    void OnDestroy();
+    void OnDestroyed();
     void OnPosition(Vector2Int value);
 }
