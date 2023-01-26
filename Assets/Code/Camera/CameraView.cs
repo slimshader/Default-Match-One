@@ -7,7 +7,7 @@ namespace DefaultMatchOne
     {
         Camera _cam;
 
-        void Start()
+        void Awake()
         {
             _cam = GetComponent<Camera>();
         }

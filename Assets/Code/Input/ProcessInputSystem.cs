@@ -9,7 +9,7 @@ namespace DefaultMatchOne
 
         public ProcessInputSystem(World world) : base(world)
         {
-            _byPosition = world.GetEntities().With<Piece>().AsMap<Position>();
+            _byPosition = world.GetEntities().With<Piece>().Without<IsDestroyed>().AsMap<Position>();
         }
 
         protected override void Update(float dt, ref InputComponent component)
