@@ -554,6 +554,8 @@ MonoBehaviour:
   _gameConfig: {fileID: 11400000, guid: 6c4a3941c55f94645b6db2f2966718cf, type: 2}
   _pieceColorsConfig: {fileID: 11400000, guid: 728c162fa75b44542b8bfd3b7e599491, type: 2}
   _scoreLabel: {fileID: 760695794}
+  _burstModeText: {fileID: 1698247193}
+  _burstModeButton: {fileID: 1643931743}
   _cameraView: {fileID: 1964826948}
 --- !u!4 &1577264198
 Transform:

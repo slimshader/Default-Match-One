@@ -4,6 +4,7 @@ using DefaultMatchOne.Messages;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DefaultMatchOne
 {
@@ -69,6 +70,12 @@ namespace DefaultMatchOne
         private TMP_Text _scoreLabel;
 
         [SerializeField]
+        private TMP_Text _burstModeText;
+
+        [SerializeField]
+        private Button _burstModeButton;
+
+        [SerializeField]
         private CameraView _cameraView;
 
         World _world;
@@ -91,6 +98,29 @@ namespace DefaultMatchOne
             _world.SubscribeWorldComponentAdded((World world, in Board board) =>
             {
                 _cameraView.OnAnyBoard(board.Size);
+            });
+
+            _world.SubscribeWorldComponentAdded((World world, in BurstMode burstMode) =>
+            {
+                _burstModeText.text = "Burst Mode: on";
+            });
+
+            // uncommeting this code causes:
+            // IndexOutOfRangeException: Index was outside the bounds of the array.
+            //
+            //_world.SubscribeWorldComponentRemoved((World world, in BurstMode burstMode) =>
+            //{
+            //    _burstModeText.text = "Burst Mode: off";
+            //});
+
+            _burstModeText.text = "Burst Mode: off";
+
+            _burstModeButton.onClick.AddListener(() =>
+            {
+                if (_world.Has<BurstMode>())
+                    _world.Remove<BurstMode>();
+                else
+                    _world.Set<BurstMode>();
             });
 
             _systems = new SequentialSystem<float>(
