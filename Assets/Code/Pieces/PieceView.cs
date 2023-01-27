@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DefaultMatchOne
 {
-    public class PieceView : View
+    public sealed class PieceView : View
     {
         public SpriteRenderer Sprite;
         public float DestroyDuration;
@@ -18,6 +18,8 @@ namespace DefaultMatchOne
                 var config = _linkedEntity.World.Get<IPieceColorsConfig>();
                 Sprite.color = config.Colors[_linkedEntity.Get<Piece>().Type];
             }
+
+            OnPosition(_linkedEntity.Get<Position>().Value);
         }
 
         public override void OnPosition(Vector2Int value)

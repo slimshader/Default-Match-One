@@ -1,18 +1,14 @@
-using DefaultEcs;
 using DefaultEcs.System;
 
 namespace DefaultMatchOne
 {
+    [With(typeof(IsDestroyed))]
     public sealed partial class RemoveViewSystem : AEntitySetSystem<float>
     {
-        public RemoveViewSystem(World world)
-            : base(world.GetEntities().With<IsDestroyed>().With<ViewComponent>().AsSet(), true)
+        [Update]
+        private void Update(float _, in ViewComponent view)
         {
-        }
-
-        protected override void Update(float state, in Entity entity)
-        {
-            entity.Get<ViewComponent>().Value.OnDestroyed();
+            view.Value.OnDestroyed();
         }
     }
 }

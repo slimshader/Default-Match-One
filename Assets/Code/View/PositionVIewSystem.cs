@@ -1,9 +1,10 @@
 using DefaultEcs;
 using DefaultEcs.System;
+using System;
 
 namespace DefaultMatchOne
 {
-    public class PositionViewSystem : AEntitySetSystem<float>
+    public sealed class PositionViewSystem : AEntitySetSystem<float>
     {
         public PositionViewSystem(World world) : base(world.GetEntities()
             .With<ViewComponent>()
@@ -13,9 +14,12 @@ namespace DefaultMatchOne
 
         }
 
-        protected override void Update(float state, in Entity entity)
+        protected override void Update(float state, ReadOnlySpan<Entity> entities)
         {
-            entity.Get<ViewComponent>().Value.OnPosition(entity.Get<Position>().Value);
+            foreach (var entity in entities)
+            {
+                entity.Get<ViewComponent>().Value.OnPosition(entity.Get<Position>().Value);
+            }
         }
     }
 }

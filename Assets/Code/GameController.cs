@@ -101,6 +101,7 @@ namespace DefaultMatchOne
 
                 // Update
                 new FallSystem(_world),
+                new FillSystem(_world),
                 new ScoreSystem(_world),
 
                 // View
