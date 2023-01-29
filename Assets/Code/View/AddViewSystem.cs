@@ -9,7 +9,7 @@ namespace DefaultMatchOne
         readonly Transform _parent;
 
         public AddViewSystem(World world)
-            : base(world.GetEntities().With<Asset>().Without<ViewComponent>().AsSet(), true)
+            : base(world.GetEntities().With<Asset>().Without<IView>().AsSet(), true)
         {
             _parent = new GameObject("Views").transform;
         }
@@ -19,7 +19,7 @@ namespace DefaultMatchOne
             var prefab = Resources.Load<GameObject>(entity.Get<Asset>().Value);
             var view = Object.Instantiate(prefab, _parent).GetComponent<IView>();
             view.Link(entity);
-            entity.Set(new ViewComponent() { Value = view });
+            entity.Set(view);
         }
     }
 }

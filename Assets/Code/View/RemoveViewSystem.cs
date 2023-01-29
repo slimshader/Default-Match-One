@@ -6,9 +6,9 @@ namespace DefaultMatchOne
     public sealed partial class RemoveViewSystem : AEntitySetSystem<float>
     {
         [Update]
-        private void Update(float _, in ViewComponent view)
+        private void Update(float _, in IView view)
         {
-            view.Value.OnDestroyed();
+            view.OnDestroyed();
         }
     }
 }

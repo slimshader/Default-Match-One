@@ -30,11 +30,6 @@ namespace DefaultMatchOne
         public string Value;
     }
 
-    public struct ViewComponent
-    {
-        public IView Value;
-    }
-
     public struct InputComponent
     {
         public Vector2Int Value;

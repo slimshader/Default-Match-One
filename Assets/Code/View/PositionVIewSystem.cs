@@ -7,7 +7,7 @@ namespace DefaultMatchOne
     public sealed class PositionViewSystem : AEntitySetSystem<float>
     {
         public PositionViewSystem(World world) : base(world.GetEntities()
-            .With<ViewComponent>()
+            .With<IView>()
             .WhenChanged<Position>()
             .WhenAdded<Position>().AsSet())
         {
@@ -18,7 +18,7 @@ namespace DefaultMatchOne
         {
             foreach (var entity in entities)
             {
-                entity.Get<ViewComponent>().Value.OnPosition(entity.Get<Position>().Value);
+                entity.Get<IView>().OnPosition(entity.Get<Position>().Value);
             }
         }
     }
