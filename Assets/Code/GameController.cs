@@ -100,13 +100,10 @@ namespace DefaultMatchOne
                 _burstModeText.text = "Burst Mode: on";
             });
 
-            // uncommeting this code causes:
-            // IndexOutOfRangeException: Index was outside the bounds of the array.
-            //
-            //_world.SubscribeWorldComponentRemoved((World world, in BurstMode burstMode) =>
-            //{
-            //    _burstModeText.text = "Burst Mode: off";
-            //});
+            _world.SubscribeWorldComponentRemoved((World world, in BurstMode burstMode) =>
+            {
+                _burstModeText.text = "Burst Mode: off";
+            });
 
             _burstModeText.text = "Burst Mode: off";
 
